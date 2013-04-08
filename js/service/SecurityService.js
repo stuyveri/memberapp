@@ -1,21 +1,38 @@
 ﻿function SecurityService() {
 
-	this.SetXss = function () {
-        console.log("Handler for SecurityService.SetXss called.");
+	this.EnableXSS = function () {
 		//enable XSS
 		jQuery.support.cors = true;
 	};
 
-	this.GetNews = function (successCallback) {
-        console.log("Handler for NewsService.GetNews called.");
+	this.DoLogin = function () {
+        console.log("Handler for SecurityService.DoLogin called.");
+		var securityLoginReturn;
+		
+		// Ajax call for login
+		return $.ajax({
+			type: "POST",
+			headers: { "Origin" : "https://partners.logica.com" },
+			url: props.loginUrl,
+			data: props.loginData
+		})
+		.fail( function ( xhr, status, error ) {
+			console.log("SecurityService error: " + error);
+			console.log("SecurityService status: " + status);
 
-		$.ajax({
-            url: properties.newsUrl,
-            headers: { "Accept" : "application/json" },
-            error: function ( xhr, status, error ) {
-				console.log("error: " + error);
-				console.log("status: " + status);
-            }
-        }).done( successCallback ); 
+			securityLoginReturn = new SecurityLoginReturn( "Login failed: " + error, AJAX_STATUS.ERROR );
+			variables.LoginDone = false;
+		})
+		.done( function ( data, status, xhr ) {
+			
+			console.log("SecurityService.DoLogin success.");
+			
+			securityLoginReturn = new SecurityLoginReturn( "Login successfull! ", AJAX_STATUS.SUCCESS );
+			variables.LoginDone = true;
+		})
+		.pipe( function ( ) {
+			console.log("pipe called.");
+			return securityLoginReturn;
+		});
 	};
 }

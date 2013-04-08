@@ -1,16 +1,20 @@
 ﻿document.addEventListener("deviceready", onDeviceReadyForSecurity, false);
 
 function onDeviceReadyForSecurity() {
-    console.log("onDeviceReady called.");
-		
-    //enable XSS
-    jQuery.support.cors = true;
-      
-	$('#btnDoLogin').click();
+    console.log("onDeviceReadyForSecurity called.");
+	
+	(new SecurityService()).EnableXSS();
+
+	//check connection
+	console.log("Connection: " + navigator.connection.type);
+    if( navigator.connection.type != Connection.NONE ) {
+		$('#btnDoLogin').click();
+	}
 }
 
 function SecurityController($scope) {
 
+	var securityService = new SecurityService();
 	$scope.model = {
 		message : "Login in progress",
 		class : "loginlistening"
@@ -24,29 +28,27 @@ function SecurityController($scope) {
 	$scope.DoLogin = function () {
         console.log("Handler for DoLogin called.");
 
-		// Ajax call for login
-		$.ajax({
-			type: "POST",
-			headers: { "Origin" : "https://partners.logica.com" },
-			url: "https://partners.logica.com/uniquesig1a2534a1eb56796c8204da5e414295d6/uniquesig0/InternalSite/Validate.asp",
-			data: "user_name=GROUPINFRA%5Cstuyveri&password=Thursday%3F2&repository=EXTERNALINFRA&site_name=partnersportal&secure=1&resource_id=7E229277F6B94B65B4CC3E596074362D&login_type=2",
-			success: function ( data, status, xhr ) {
-				console.log("DoLogin success.");
-
-				$scope.model.message = "Login done";
+		securityService.DoLogin()
+		.done( function ( securityLoginReturn ) {
+			console.log("Handler for DoLogin.done called: " + securityLoginReturn.status);
+		
+			$scope.model.message = securityLoginReturn.message;
+			
+			if( securityLoginReturn.status == AJAX_STATUS.SUCCESS ) {			
 				$scope.model.class = "loginreceivedsuccess";
-
-				//$('#btnDoNothing').click();
-			},
-            error: function ( xhr, status, error ) {
-				console.log("error: " + error);
-				console.log("status: " + status);
-
-				$scope.model.message = "Login failed";
+			} else {
 				$scope.model.class = "loginreceivederror";
+			}
 
-				//$('#btnDoNothing').click();
-            }
+			navigator.notification.alert(
+				securityLoginReturn.message,  // message
+				function (buttonIndex) { },              // callback to invoke with index of button pressed
+				'Connection',            // title
+				'OK'          // buttonLabels
+			);
+
+			$('#btnDoNothing').click();
 		});
 	}
 }
+

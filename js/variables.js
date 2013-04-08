@@ -1,0 +1,4 @@
+﻿
+var variables = {
+	LoginDone : false
+}

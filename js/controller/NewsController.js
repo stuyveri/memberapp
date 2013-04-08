@@ -1,6 +1,8 @@
 ﻿function NewsController($scope) {
-	$scope.newsItems = [];
 	var newsService = new NewsService();
+	$scope.model = {
+		newsItems : []
+	}
 	
 	$scope.AddNewsItem = function (title, col1) {
 		$scope.newsItems.push(new News(title, col1));
@@ -20,19 +22,22 @@
 	$scope.GetNews = function () {
         console.log("Handler for GetNews called.");
 
-		newsService.GetNews($scope.ProcessNews);
-	}
-	
-	$scope.ProcessNews = function ( data ) {
-        console.log("Handler for ProcessNews called.");
-		
-		console.log("data.d: " + data.d.results.length);
+		newsService.GetNews()
+		.done( function ( newsReturn ) {
+			console.log("Handler for ProcessNews called.");
 
-        $(data.d.results).each(function (index, news) {
-            var news = new News(news.Title, news.Col1);
-            $scope.newsItems.push(news);
-        });
+			if( newsReturn.status == AJAX_STATUS.SUCCESS ) {
+				$scope.model.newsItems = newsReturn.newsItems;
+			}
 
-		$('#btnDoNothing').click();
+			navigator.notification.alert(
+				newsReturn.message,
+				function (buttonIndex) { },              // callback to invoke with index of button pressed
+				'Get news',            // title
+				'OK'          // buttonLabels
+			);
+
+			$('#btnDoNothing').click();
+		});
 	}
 }
