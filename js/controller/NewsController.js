@@ -1,34 +1,21 @@
 ﻿function NewsController($scope) {
 	var newsService = new NewsService();
-	$scope.model = {
-		newsItems : []
+	$scope.news = {
+		items : []
 	}
 	
-	$scope.AddNewsItem = function (title, col1) {
-		$scope.newsItems.push(new News(title, col1));
-	}
-	
-	$scope.DoNothing = function () {
-        console.log("Handler for NewsController.DoNothing called.");
-		// just refresh page
-
-		newsService.DoNothing($scope.DoSomething);
-	}
-	
-	$scope.DoSomething = function () {
-        console.log("Handler for NewsController.DoSomething called.");
-	}
-	
-	$scope.GetNews = function () {
+	$scope.getNews = function () {
         console.log("Handler for GetNews called.");
 
-		newsService.GetNews()
+		newsService.getNews()
 		.done( function ( newsReturn ) {
 			console.log("Handler for ProcessNews called.");
-
-			if( newsReturn.status == AJAX_STATUS.SUCCESS ) {
-				$scope.model.newsItems = newsReturn.newsItems;
-			}
+			
+			$scope.$apply( function( scope ) {
+				if( newsReturn.status == AJAX_STATUS.SUCCESS ) {
+					scope.news.items = newsReturn.newsItems;
+				}
+			});
 
 			navigator.notification.alert(
 				newsReturn.message,
@@ -36,8 +23,6 @@
 				'Get news',            // title
 				'OK'          // buttonLabels
 			);
-
-			$('#btnDoNothing').click();
 		});
 	}
 }

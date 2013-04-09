@@ -1,11 +1,11 @@
 ﻿function SecurityService() {
 
-	this.EnableXSS = function () {
+	this.enableXSS = function () {
 		//enable XSS
 		jQuery.support.cors = true;
 	};
 
-	this.DoLogin = function () {
+	this.doLogin = function () {
         console.log("Handler for SecurityService.DoLogin called.");
 		var securityLoginReturn;
 		

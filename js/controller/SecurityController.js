@@ -3,7 +3,7 @@
 function onDeviceReadyForSecurity() {
     console.log("onDeviceReadyForSecurity called.");
 	
-	(new SecurityService()).EnableXSS();
+	(new SecurityService()).enableXSS();
 
 	//check connection
 	console.log("Connection: " + navigator.connection.type);
@@ -20,25 +20,22 @@ function SecurityController($scope) {
 		class : "loginlistening"
 	}
 	
-	$scope.DoNothing = function () {
-        console.log("Handler for SecurityController.DoNothing called.");
-		// just refresh page
-	}
-	
-	$scope.DoLogin = function () {
+	$scope.doLogin = function () {
         console.log("Handler for DoLogin called.");
 
-		securityService.DoLogin()
+		securityService.doLogin()
 		.done( function ( securityLoginReturn ) {
 			console.log("Handler for DoLogin.done called: " + securityLoginReturn.status);
 		
-			$scope.model.message = securityLoginReturn.message;
+			$scope.$apply( function( scope ) {
+				scope.model.message = securityLoginReturn.message;
 			
-			if( securityLoginReturn.status == AJAX_STATUS.SUCCESS ) {			
-				$scope.model.class = "loginreceivedsuccess";
-			} else {
-				$scope.model.class = "loginreceivederror";
-			}
+				if( securityLoginReturn.status == AJAX_STATUS.SUCCESS ) {			
+					scope.model.class = "loginreceivedsuccess";
+				} else {
+					scope.model.class = "loginreceivederror";
+				}
+			});
 
 			navigator.notification.alert(
 				securityLoginReturn.message,  // message
@@ -46,8 +43,6 @@ function SecurityController($scope) {
 				'Connection',            // title
 				'OK'          // buttonLabels
 			);
-
-			$('#btnDoNothing').click();
 		});
 	}
 }

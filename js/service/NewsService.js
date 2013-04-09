@@ -1,11 +1,6 @@
 ﻿function NewsService() {
 
-	this.DoNothing = function (callback) {
-        console.log("Handler for NewsService.DoNothing called.");
-		callback();
-	};
-
-	this.GetNews = function () {
+	this.getNews = function () {
         console.log("Handler for NewsService.GetNews called." + variables.LoginDone);
 		var newsReturn;
 		
