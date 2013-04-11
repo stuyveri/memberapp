@@ -1,0 +1,8 @@
+<div ng-controller="NewsController">
+    <button id="btnGet" name="btnGet" ng-click="getNews()">Get News</button>
+    <ul data-role="listview">
+        <li ng-repeat="newsItem in news.items">
+            <a href="#">{{newsItem.title}} / {{newsItem.col1}}</a>
+        </li>
+    </ul>
+</div>
