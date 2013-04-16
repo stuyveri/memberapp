@@ -26,7 +26,7 @@
 				console.log("data.d: " + data.d.results.length);
 
 				$(data.d.results).each(function (index, news) {
-					var news = new News(news.Title, news.Col1);
+					var news = new News(news.Id, news.Title, news.ShortText, news.LongText, news.PictureBase64);
 					newsItems.push(news);
 				});
 

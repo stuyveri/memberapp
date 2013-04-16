@@ -1,4 +1,6 @@
-﻿document.addEventListener("deviceready", onDeviceReadyForSecurity, false);
+﻿
+
+document.addEventListener("deviceready", onDeviceReadyForSecurity, false);
 
 function onDeviceReadyForSecurity() {
     console.log("onDeviceReadyForSecurity called.");
@@ -26,16 +28,11 @@ function SecurityController($scope) {
 		securityService.doLogin()
 		.done( function ( securityLoginReturn ) {
 			console.log("Handler for DoLogin.done called: " + securityLoginReturn.status);
-		
-			$scope.$apply( function( scope ) {
-				scope.model.message = securityLoginReturn.message;
 			
-				if( securityLoginReturn.status == AJAX_STATUS.SUCCESS ) {			
-					scope.model.class = "loginreceivedsuccess";
-				} else {
-					scope.model.class = "loginreceivederror";
-				}
-			});
+			if( securityLoginReturn.status == AJAX_STATUS.SUCCESS ) {		
+				//launch login done event
+				$scope.$broadcast("LOGIN_DONE", "LOGIN_DONE");
+			}
 
 			navigator.notification.alert(
 				securityLoginReturn.message,  // message

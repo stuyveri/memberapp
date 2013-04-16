@@ -1,6 +1,9 @@
-﻿function News(titleIn, col1In) {
+﻿function News(idIn, titleIn, shortTextIn, longTextIn, pictureBase64In) {
+	this.id = idIn;
 	this.title = titleIn;
-	this.col1 = col1In;
+	this.shortText = shortTextIn;
+	this.longText = longTextIn;
+	this.pictureBase64 = pictureBase64In;
 }
 
 function NewsReturn(messageIn, newsItemsIn, statusIn) {
