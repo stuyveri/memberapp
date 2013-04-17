@@ -22,9 +22,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.0.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/cgi.css" />
+      <link rel="stylesheet" type="text/css" href="css/cgi.css" />
         <title>CGI BE Member App</title>
 
 
@@ -58,38 +57,24 @@
           <!-- /navbar -->
         </div>
         <!-- /header -->
-         <!-- Doesn't seem to work with jqmobile <div ng-include src="'view/news.html'"></div>-->
-          <div ng-controller="NewsController">
-              <div class="ui-content">
-                  <button id="btnGet" name="btnGet" ng-click="getNews()">Get News</button>
-                  <div style="padding:20px;">
-                      <ul data-role="listview" data-inset="true">
-                          <li ng-repeat="newsItem in news.items" class="news_part">
-                              <a class="news_item" href="#">
-                                  <img src="img/news_icon.png" width="150px" height="150px">
-                                  <h2>{{newsItem.title}}</h2>
-                                  <p>{{newsItem.col1}}</p>
-                              </a>
-                          </li>
-                          <li class="news_part"><a class="news_item" href="#">
-                              <img src="img/news_icon.png" width="150px" height="150px">
-                              <h2>New Client</h2>
-                              <p>Toyota</p></a>
-                          </li>
-                          <li class="news_part"><a class="news_item" href="#">
-                              <img src="img/news_icon.png" width="150px" height="150px">
-                              <h2>Warning</h2>
-                              <p>Laptops are slow</p></a>
-                          </li>
-                          <li class="news_part"><a class="news_item" href="#">
-                              <img src="img/news_icon.png" width="150px" height="150px">
-                              <h2>Building</h2>
-                              <p>Diegem office flooded</p></a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
+        <div ng-controller="NewsController">
+          <div style="display:none;">
           </div>
+          <div class="ui-content">
+            <button id="btnGet" name="btnGet" ng-click="getNews()">Refresh News</button>
+            <div style="padding-top:20px;">
+              <ul data-role="listview" data-insert="true">
+                <li ng-repeat="newsItem in news.items" class="news_part">
+                  <a class="news_item" ng-click="getDetail(newsItem.id)">
+                    <img src="data:image/jpg;base64,{{newsItem.pictureBase64}}" width="150px" height="150px"/>
+                    <h2>{{newsItem.title}}</h2>
+                    <p>{{newsItem.shortText}}</p>
+                  </a>
+                </li>
+               </ul>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- /page one -->
 
@@ -159,6 +144,56 @@
         </div>
       </div>
       <!-- /page three -->
+
+      
+      
+      
+
+
+
+      <div data-role="page" id="four">
+
+        <div data-role="header">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <a href="#one" class="ui-btn-active">News</a>
+              </li>
+              <li>
+                <a href="#two">Leads</a>
+              </li>
+              <li>
+                <a href="#three">Settings</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /header -->
+        <div ng-controller="NewsController">
+          <!-- /show detail information on news -->
+          <table>
+            <tr>
+              <td>
+                <h2 id="newsDetailTitle">{{news.selectedItem.Title}}</h2>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p id="newsDetailShortText">{{news.selectedItem.shortText}}</p>
+                <img id="newsDetailPic" src="data:image/jpg;base64,{{news.selectedItem.pictureBase64}}" width="100px" height="100px"/>
+              </td>
+            </tr>
+             <tr>
+              <td>
+                <p id="newsDetailLongText">{{news.selectedItem.longText}}</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- /page four -->
+
 
       <script type="text/javascript" src="cordova-2.5.0.js"></script>
       <script type="text/javascript" src="js/index.js"></script>
