@@ -105,12 +105,18 @@
         </div>
         <!-- /header -->
 
-        <div ng-controller="LeadController">
-            <input type="text" ng-model="lead.title" size ="255" placeholder="Title" />
-            <input type="text" ng-model="lead.col1" size ="255" placeholder="Col1" />
+        <form name="leadForm" ng-controller="LeadController">
+            <input type="text" ng-model="lead_title" size ="255" placeholder="Title" />
+            <input type="text" name="lead_col1" ng-model="lead_col1" size ="255" placeholder="Col1" ng-minlength="5" required />
+          <span class="error" ng-show="leadForm.lead_col1.$error.required">
+            Required!
+          </span>
+          <span class="error" ng-show="leadForm.lead_col1.$error.minlength">
+            Single word only!
+          </span>
             <br/>
             <button id="btnAddLead" name="btnAddLead" ng-click="addLead()">Add</button>
-        </div>
+        </form>
 
       </div>
       <!-- /page two -->
@@ -137,8 +143,8 @@
         </div>
         <!-- /header -->
         <div ng-controller="SettingsController">
-          <input type="text" id="setting_user" ng-model="setting.user" size ="255" placeholder="User name" />
-          <input type="password" id="setting_password" ng-model="setting.password" size ="255" placeholder="Password" />
+          <input type="text" id="setting_user" ng-model="setting_user" size ="255" placeholder="User name" />
+          <input type="password" id="setting_password" ng-model="setting_password" size ="255" placeholder="Password" />
           <br/>
           <button id="btnUpdateSettings" name="btnUpdateSettings" ng-click="updateSettings()">Update Settings</button>
         </div>
@@ -218,6 +224,7 @@
       <script type="text/javascript" src="js/controller/settingsController.js"></script>
       <script type="text/javascript" src="js/service/settingsService.js"></script>
       <script type="text/javascript" src="js/service/fileService.js"></script>
+      <script type="text/javascript" src="js/service/initService.js"></script>
       <script type="text/javascript">
         app.initialize();
       </script>
