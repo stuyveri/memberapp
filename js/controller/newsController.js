@@ -1,13 +1,22 @@
 ﻿function NewsController($scope) {
 	var newsService = new NewsService();
+	var localSettingsService = new settingsService();
 	$scope.news = {
 		items : [],
 		selectedItem : null
 	}
 
-	$scope.$on("LOGIN_DONE", function(event, message){
-		console.log("Handler for loginDone.loginDone called. " + message);
-		$('#btnGet').click();
+	//$scope.$on("LOGIN_DONE", function(event, message){
+	//	console.log("Handler for loginDone.loginDone called. " + message);
+	//	$('#btnGet').click();
+	//});
+
+	$("#filesLoadedDone").on('filesLoadedDoneEvent', function() {
+		console.log("On filesLoadedDoneEventNews called.");
+	
+		$scope.$apply( function( scope ) {
+			scope.news.items = variables.News;
+		});
 	});
 	
 	$scope.getNews = function () {
@@ -20,6 +29,9 @@
 			$scope.$apply( function( scope ) {
 				if( newsReturn.status == AJAX_STATUS.SUCCESS ) {
 					scope.news.items = newsReturn.newsItems;
+					variables.News = newsReturn.newsItems;
+
+					localSettingsService.writeSettings();
 				}
 			});
 

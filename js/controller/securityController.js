@@ -1,9 +1,6 @@
 ﻿
-
-document.addEventListener("deviceready", onDeviceReadyForSecurity, false);
-
-function onDeviceReadyForSecurity() {
-    console.log("onDeviceReadyForSecurity called.");
+$("#filesLoadedDone").on('filesLoadedDoneEvent', function() {
+    console.log("On filesLoadedDoneEvent called.");
 	
 	(new SecurityService()).enableXSS();
 
@@ -12,7 +9,7 @@ function onDeviceReadyForSecurity() {
     if( navigator.connection.type != Connection.NONE ) {
 		$('#btnDoLogin').click();
 	}
-}
+});
 
 function SecurityController($scope) {
 
