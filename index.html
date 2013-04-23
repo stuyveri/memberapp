@@ -29,6 +29,7 @@
 
     </head>
     <body>
+    <div class="ui-content">
       <div>
         <!-- Divs to support events -->
         <div name="loginDone" id="loginDone" />
@@ -41,6 +42,7 @@
         </div>
         <p class="event {{model.class}}">{{model.message}}</p>
       </div>
+      </div>
 
       <div data-role="page" data-url="news" id="news" class="ui-page" data-dom-cache="true" data-theme="a"
            data-prev="null" data-next="leads">
@@ -49,7 +51,7 @@
           <div data-role="navbar">
             <ul>
               <li>
-                <a href="#one" class="ui-btn-active">News</a>
+                <a href="#news" class="ui-btn-active ui-state-persist">News</a>
               </li>
               <li>
                 <a href="#two">Leads</a>
@@ -86,16 +88,17 @@
 
 
       <!-- Start of second page: #two -->
-      <div data-role="page" id="two">
+      <div data-role="page" data-url="two" id="two" class="ui-page" data-dom-cache="true" data-theme="a"
+               data-prev="null" data-next="leads">
 
-        <div data-role="header">
+        <div data-role="header" data-position="fixed" data-fullscreen="true" data-id="hdr" data-tap-toggle="false">
           <div data-role="navbar">
             <ul>
               <li>
-                <a href="#one">News</a>
+                <a href="#news">News</a>
               </li>
               <li>
-                <a href="#two" class="ui-btn-active">Leads</a>
+                <a href="#two" class="ui-btn-active ui-state-persist">Leads</a>
               </li>
               <li>
                 <a href="#three">Settings</a>
@@ -105,7 +108,7 @@
           <!-- /navbar -->
         </div>
         <!-- /header -->
-
+          <div class="ui-content">
         <form name="leadForm" ng-controller="LeadController">
             <input type="text" ng-model="lead_title" size ="255" placeholder="Title" />
             <input type="text" name="lead_col1" ng-model="lead_col1" size ="255" placeholder="Col1" ng-minlength="5" required />
@@ -118,25 +121,27 @@
             <br/>
             <button id="btnAddLead" name="btnAddLead" ng-click="addLead()">Add</button>
         </form>
+              </div>
 
       </div>
       <!-- /page two -->
 
 
 
-      <div data-role="page" id="three">
+      <div data-role="page" data-url="three" id="three" class="ui-page" data-dom-cache="true" data-theme="a"
+           data-prev="null" data-next="leads">
 
-        <div data-role="header">
+        <div data-role="header" data-position="fixed" data-fullscreen="true" data-id="hdr" data-tap-toggle="false">
           <div data-role="navbar">
             <ul>
               <li>
-                <a href="#one">News</a>
+                <a href="#news">News</a>
               </li>
               <li>
                 <a href="#two">Leads</a>
               </li>
               <li>
-                <a href="#three" class="ui-btn-active">Settings</a>
+                <a href="#three" class="ui-btn-active ui-state-persist">Settings</a>
               </li>
             </ul>
           </div>
@@ -144,10 +149,12 @@
         </div>
         <!-- /header -->
         <div ng-controller="SettingsController">
+            <div class="ui-content">
           <input type="text" id="setting_user" ng-model="setting_user" size ="255" placeholder="User name" />
           <input type="password" id="setting_password" ng-model="setting_password" size ="255" placeholder="Password" />
           <br/>
           <button id="btnUpdateSettings" name="btnUpdateSettings" ng-click="updateSettings()">Update Settings</button>
+                </div>
         </div>
       </div>
       <!-- /page three -->
@@ -164,7 +171,7 @@
           <div data-role="navbar">
             <ul>
               <li>
-                <a href="#one" class="ui-btn-active">News</a>
+                <a href="#news" class="ui-btn-active">News</a>
               </li>
               <li>
                 <a href="#two">Leads</a>
