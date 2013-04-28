@@ -3,27 +3,21 @@
 function onDeviceReadyForInit() {
 	console.log("onDeviceReadyForInit called.");
 	
+	$("div[data-role='page']").bind("swipeleft", function() {
+		changePage($(this), "data-next");
+	});
 	
-	$("#one").bind("swipeleft", function(){
-		$.mobile.changePage($("#two"));
+	$("div[data-role='page']").bind("swiperight", function() {
+		changePage($(this), "data-prev");
 	});
-	$("#one").bind("swiperight", function(){
-		$.mobile.changePage($("#three"));
-	});
-	$("#two").bind("swipeleft", function(){
-		$.mobile.changePage($("#three"));
-	});
-	$("#two").bind("swiperight", function(){
-		$.mobile.changePage($("#one"));
-	});
-	$("#three").bind("swipeleft", function(){
-		$.mobile.changePage($("#one"));
-	});
-	$("#three").bind("swiperight", function(){
-		$.mobile.changePage($("#two"));
-	});
-	$("#four").bind("swiperight", function(){
-		$.mobile.changePage($("#one"));
-	});
+
 	console.log("onDeviceReadyForInit Done.");
 }	
+
+function changePage(theDiv, attrName) {
+	var strPage =  theDiv.attr(attrName);
+	if( strPage != "null" ) {
+		var page = $("#" +  strPage);
+		$.mobile.changePage(page);
+	}
+}

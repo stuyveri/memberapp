@@ -32,13 +32,16 @@ function gotFile(file) {
 		console.log("Read File as text");
 
 		var data = evt.target.result;
-		console.log("data: " + angular.toJson(data));
 
 		if( data != "" ) {
+			var dataObj = angular.fromJson(evt.target.result);
+			console.log("data0: " + data);
+			console.log("data1: " + angular.toJson(data));
+			console.log("data2: " + dataObj.settings);
 			//angular.fromJson(settingsString)
-			variables.Settings = data.settings;
-		console.log("variables.Settings: " + angular.toJson(variables.Settings));
-			variables.News = data.news;
+			variables.Settings = dataObj.settings;
+			console.log("variables.Settings: " + angular.toJson(variables.Settings));
+			variables.News = dataObj.news;
 
 			//launch event
 			$("#filesLoadedDone").trigger('filesLoadedDoneEvent');

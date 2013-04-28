@@ -12,7 +12,7 @@
 			return $.ajax({
 				type: props.ajaxPost,
 				contentType: props.jsonContentType,
-				url: props.newsUrl,
+				url: props.leadUrl,
 				data: body
 			})
 			.fail( function ( xhr, status, error ) {

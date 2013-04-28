@@ -2,6 +2,7 @@
 	this.baseUrl = "https://partners.logica.com/workspace/820311/memberapp";
 	this.baseFeedUrl = this.baseUrl + "/_vti_bin/listdata.svc";
 	this.newsUrl = this.baseFeedUrl + "/MemberNews";
+	this.leadUrl = this.baseFeedUrl + "/MemberLeads";
 	//newsUrl = "https://partners.logica.com/workspace/820311/memberapp/_vti_bin/listdata.svc/MemberNews";
 	this.loginUrl = "https://partners.logica.com/uniquesig1a2534a1eb56796c8204da5e414295d6/uniquesig0/InternalSite/Validate.asp";
 	this.loginData1 = "user_name="

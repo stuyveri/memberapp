@@ -18,5 +18,12 @@ function SettingsController($scope) {
 		var settings = new Settings($scope.setting_user, $scope.setting_password);
 		variables.Settings = settings;
 		localSettingsService.writeSettings();
+
+		navigator.notification.alert(
+			"Settigns updated!",
+			function (buttonIndex) { },              // callback to invoke with index of button pressed
+			'Settings',            // title
+			'OK'          // buttonLabels
+		);
 	}
 }

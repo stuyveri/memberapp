@@ -5,7 +5,8 @@ function LeadController($scope) {
 	
 	$scope.addLead = function () {
         console.log("Handler for LeadController.addLead called.");
-		var lead = new Lead($scope.lead.title, $scope.lead.col1);
+		var title = $scope.lead_client + " | " + variables.Settings.userName
+		var lead = new Lead(title, $scope.lead_client, $scope.lead_industry, $scope.lead_contact, $scope.lead_description, $scope.lead_type, variables.Settings.userName);
 
 		leadService.addLead(lead)
 		.done( function ( addLeadReturn ) {

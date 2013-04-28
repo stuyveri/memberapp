@@ -8,6 +8,9 @@ body{
 h2{
     color:#e31937;
 }
+label{
+    color:#e31937;
+}
 .ui-content{
     background: transparent;
     color:white;

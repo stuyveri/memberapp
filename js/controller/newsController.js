@@ -55,7 +55,7 @@
 		});
         console.log("selected item: " + newsItem.id);
 
-		$("#newsDetailPic").attr("src", "data:image/jpg;base64," + newsItem.pictureBase64);
+		//$("#newsDetailPic").attr("src", "data:image/jpg;base64," + newsItem.pictureBase64);
 		$("#newsDetailTitle").html(newsItem.title);
 		$("#newsDetailShortText").html(newsItem.shortText);
 		$("#newsDetailLongText").html(newsItem.longText);
@@ -71,6 +71,7 @@
 		});
         console.log("selected item on $scope: " + $scope.news.selectedItem.id);
 
-		window.location = "#four";
+		//window.location = "#newsItem";
+		$.mobile.changePage( $("#newsItem") );
 	}
 }
