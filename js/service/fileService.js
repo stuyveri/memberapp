@@ -1,4 +1,4 @@
-﻿document.addEventListener("deviceready", onDeviceReadyForFile, false);
+document.addEventListener("deviceready", onDeviceReadyForFile, false);
 
 function onDeviceReadyForFile() {
 	console.log("onDeviceReadyForFile called.");
@@ -35,13 +35,14 @@ function gotFile(file) {
 
 		if( data != "" ) {
 			var dataObj = angular.fromJson(evt.target.result);
-			console.log("data0: " + data);
-			console.log("data1: " + angular.toJson(data));
-			console.log("data2: " + dataObj.settings);
+			//console.log("data0: " + data);
+			//console.log("data1: " + angular.toJson(data));
+			//console.log("data2: " + dataObj.settings);
 			//angular.fromJson(settingsString)
 			variables.Settings = dataObj.settings;
-			console.log("variables.Settings: " + angular.toJson(variables.Settings));
+			//console.log("variables.Settings: " + angular.toJson(variables.Settings));
 			variables.News = dataObj.news;
+			variables.MyLeads = dataObj.leads;
 
 			//launch event
 			$("#filesLoadedDone").trigger('filesLoadedDoneEvent');
@@ -53,7 +54,7 @@ function gotFile(file) {
 function doWrite() {
 	console.log("doWrite called");
 
-	var fileData = new FileData(variables.Settings, variables.News);
+	var fileData = new FileData(variables.Settings, variables.News, variables.MyLeads);
 
 	variables.FileWriter.truncate(0);
 	var data = angular.toJson(fileData)
@@ -62,6 +63,10 @@ function doWrite() {
 
 	console.log("doWrite done");
 	//TODO: callback for nice update on screen
+}
+
+function clearFile() {
+	variables.FileWriter.truncate(0);
 }
 
 

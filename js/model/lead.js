@@ -1,4 +1,5 @@
-﻿function Lead(titleIn, clientIn, industryIn, contactIn, descriptionIn, leadTypeIn, creatorUserNameIn) {
+﻿function Lead(idIn, titleIn, clientIn, industryIn, contactIn, descriptionIn, leadTypeIn, creatorUserNameIn) {
+	this.Id = idIn;
 	this.Title = titleIn;
 	this.Client = clientIn;
 	this.Industry = industryIn;
@@ -10,5 +11,11 @@
 
 function AddLeadReturn(messageIn, statusIn) {
 	this.message = messageIn;
+	this.status = statusIn;
+}
+
+function GetMyLeadsReturn(messageIn, leadsIn, statusIn) {
+	this.message = messageIn;
+	this.leads = leadsIn;
 	this.status = statusIn;
 }

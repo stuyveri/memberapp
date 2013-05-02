@@ -1,6 +1,7 @@
 ﻿
-$("#filesLoadedDone").on('filesLoadedDoneEvent', function() {
-    console.log("On filesLoadedDoneEvent called.");
+//$("#filesLoadedDone").on('filesLoadedDoneEvent', function() {
+$("#iframeMe").load(function() {
+    console.log("On filesLoadedDoneEvent in SecurityController called.");
 	
 	(new SecurityService()).enableXSS();
 

@@ -10,6 +10,14 @@ function onDeviceReadyForInit() {
 	$("div[data-role='page']").bind("swiperight", function() {
 		changePage($(this), "data-prev");
 	});
+	
+	$.mobile.buttonMarkup.hoverDelay = 0;
+	$.mobile.defaultDialogTransition = 'none';
+	$.mobile.defaultPageTransition = 'none';
+	
+    if( navigator.connection.type != Connection.NONE ) {
+    	$("#iframeMe").attr("src", props.baseUrl);
+    }
 
 	console.log("onDeviceReadyForInit Done.");
 }	

@@ -1,4 +1,4 @@
-﻿
+
 function SettingsController($scope) {
 	var localSettingsService = new settingsService();
 
@@ -21,6 +21,20 @@ function SettingsController($scope) {
 
 		navigator.notification.alert(
 			"Settigns updated!",
+			function (buttonIndex) { },              // callback to invoke with index of button pressed
+			'Settings',            // title
+			'OK'          // buttonLabels
+		);
+	}
+	
+	$scope.clearSettings = function () {
+        console.log("Handler for settingsController.clearSettings called.");
+
+		localSettingsService.clearData();
+		//TODO: clear screens from data
+
+		navigator.notification.alert(
+			"Data cleared!",
 			function (buttonIndex) { },              // callback to invoke with index of button pressed
 			'Settings',            // title
 			'OK'          // buttonLabels

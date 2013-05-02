@@ -12,7 +12,7 @@
 	//});
 
 	$("#filesLoadedDone").on('filesLoadedDoneEvent', function() {
-		console.log("On filesLoadedDoneEventNews called.");
+		console.log("On NewsController.filesLoadedDoneEventNews called.");
 	
 		$scope.$apply( function( scope ) {
 			scope.news.items = variables.News;
@@ -66,9 +66,9 @@
 		//	console.log("selected item on scope: " + scope.news.selectedItem.id);
 		//});
 
-		$scope.$apply( function( scope ) {
-			console.log("i'm in $apply");
-		});
+		//$scope.$apply( function( scope ) {
+		//	console.log("i'm in $apply");
+		//});
         console.log("selected item on $scope: " + $scope.news.selectedItem.id);
 
 		//window.location = "#newsItem";

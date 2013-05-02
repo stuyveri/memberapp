@@ -5,4 +5,10 @@
 		
 		doWrite();
 	};
+
+	this.clearData = function () {
+        console.log("Handler for settingsService.clearSettings called.");
+		
+		clearFile();
+	};
 }

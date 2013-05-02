@@ -21,11 +21,11 @@
 			.done( function ( data, status, xhr ) {
 				var newsItems = [];
 
-				console.log("Handler for ProcessNews called.");
+				console.log("Handler for ProcessNews called." + xhr.responseText);
 				console.log("status: " + status);
-				console.log("data.d: " + data.d.results.length);
+				console.log("data.d: " + data.d.length);
 
-				$(data.d.results).each(function (index, news) {
+				$(data.d).each(function (index, news) {
 					var news = new News(news.Id, news.Title, news.ShortText, news.LongText, news.PictureBase64);
 					newsItems.push(news);
 				});
