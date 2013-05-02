@@ -47,7 +47,8 @@
 
 
     <application android:icon="@drawable/cgi_logo" android:label="@string/app_name"
-        android:hardwareAccelerated="true">
+        android:hardwareAccelerated="true"
+        android:debuggable="true">
         <activity android:name="memberapp" android:label="@string/app_name"
                 android:theme="@android:style/Theme.Black.NoTitleBar"
                 android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
