@@ -31,7 +31,6 @@
 				});
 
 				console.log("newsItems.length: " + newsItems.length);
-				//TODO: save data to file
 			
 				newsReturn = new NewsReturn( "New retrieving successfull", newsItems, AJAX_STATUS.SUCCESS );
 			})
@@ -40,8 +39,6 @@
 				return newsReturn;
 			});
 		} else {
-			//TODO: get data from file
-
 			var deferred = $.Deferred();
 			return deferred.resolve( new NewsReturn( "Login not done", null, AJAX_STATUS.ERROR ) );
 		}

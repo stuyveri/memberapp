@@ -20,7 +20,7 @@ function SettingsController($scope) {
 		localSettingsService.writeSettings();
 
 		navigator.notification.alert(
-			"Settigns updated!",
+			"Settings updated!",
 			function (buttonIndex) { },              // callback to invoke with index of button pressed
 			'Settings',            // title
 			'OK'          // buttonLabels

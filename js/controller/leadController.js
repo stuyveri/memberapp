@@ -30,7 +30,7 @@ function LeadController($scope) {
         newId = newId + 10;
         
 		var title = $scope.lead_client + " | " + variables.Settings.userName
-		var lead = new Lead(newId, title, $scope.lead_client, $scope.lead_industry, $scope.lead_contact, $scope.lead_description, $scope.lead_type, variables.Settings.userName);
+		var lead = new Lead(null, title, $scope.lead_client, $scope.lead_industry, $scope.lead_contact, $scope.lead_description, $scope.lead_type, variables.Settings.userName);
 
 		leadService.addLead(lead)
 		.done( function ( addLeadReturn ) {
@@ -38,6 +38,7 @@ function LeadController($scope) {
 		
 			$scope.$apply( function( scope ) {
 				if( addLeadReturn.status == AJAX_STATUS.SUCCESS ) {
+					lead.Id = newId;
 					if ( variables.MyLeads == null ) {
 						variables.MyLeads = [lead];
 					} else {
@@ -81,5 +82,24 @@ function LeadController($scope) {
 				'OK'          // buttonLabels
 			);
 		});
+	}
+	
+	$scope.getLeadDetail = function (id) {
+        console.log("getLeadDetail selected item: " + id);
+		var leadItem = null;
+		$($scope.lead.items).each(function (index, lead) {
+			if( lead.Id == id ) {
+				leadItem = lead;
+			}
+		});
+        console.log("getLeadDetail selected item: " + leadItem.Id + leadItem.Client + leadItem.Industry);
+		
+		$("#leadClientDetail").text(leadItem.Client);
+		$("#leadIndustryDetail").html(leadItem.Industry);
+		$("#leadContactDetail").html(leadItem.Contact);
+		$("#leadDescriptionDetail").html(leadItem.Description);
+		$("#leadLeadTypeDetail").html(leadItem.LeadType);
+		
+		$.mobile.changePage( $("#leadItem"), {transition: 'none', role: 'dialog'} );
 	}
 }

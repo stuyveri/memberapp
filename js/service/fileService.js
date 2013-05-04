@@ -58,7 +58,7 @@ function doWrite() {
 
 	variables.FileWriter.truncate(0);
 	var data = angular.toJson(fileData)
-	console.log("data: " + data);
+	//console.log("data: " + data);
 	variables.FileWriter.write( data );
 
 	console.log("doWrite done");

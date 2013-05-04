@@ -8,7 +8,11 @@ $("#iframeMe").load(function() {
 	//check connection
 	console.log("Connection: " + navigator.connection.type);
     if( navigator.connection.type != Connection.NONE ) {
-		$('#btnDoLogin').click();
+    	//frame loaded but no user/pwd.
+    	//if frame reloads or automatic forward then the event is called again...check loginDone to prevent
+    	if( variables.Settings != null && !variables.LoginDone ) {
+			$('#btnDoLogin').click();
+		}
 	}
 });
 
