@@ -10,7 +10,11 @@ function onDeviceReadyForInit() {
 	$("div[data-role='page']").bind("swiperight", function() {
 		changePage($(this), "data-prev");
 	});
-	
+		
+	$("div[data-role='navbar']").find("a").bind("click", function() {
+		changePage($(this), "hrefx");
+	});	
+
 	$.mobile.buttonMarkup.hoverDelay = 0;
 	$.mobile.defaultDialogTransition = 'none';
 	$.mobile.defaultPageTransition = 'none';

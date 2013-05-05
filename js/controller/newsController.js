@@ -54,24 +54,11 @@
 			}
 		});
         console.log("selected item: " + newsItem.id);
+		
+		$scope.news.selectedItem = newsItem;
 
-		//$("#newsDetailPic").attr("src", "data:image/jpg;base64," + newsItem.pictureBase64);
-		$("#newsDetailTitle").html(newsItem.title);
-		$("#newsDetailShortText").html(newsItem.shortText);
-		$("#newsDetailLongText").html(newsItem.longText);
-
-		//$scope.$apply( function( scope ) {
-		//	console.log("selected item on scope: ");
-			$scope.news.selectedItem = newsItem;
-		//	console.log("selected item on scope: " + scope.news.selectedItem.id);
-		//});
-
-		//$scope.$apply( function( scope ) {
-		//	console.log("i'm in $apply");
-		//});
         console.log("selected item on $scope: " + $scope.news.selectedItem.id);
 
-		//window.location = "#newsItem";
 		$.mobile.changePage( $("#newsItem") );
 	}
 }

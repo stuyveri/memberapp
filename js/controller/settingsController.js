@@ -1,4 +1,4 @@
-
+﻿
 function SettingsController($scope) {
 	var localSettingsService = new settingsService();
 

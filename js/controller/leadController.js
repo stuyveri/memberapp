@@ -91,15 +91,11 @@ function LeadController($scope) {
 			if( lead.Id == id ) {
 				leadItem = lead;
 			}
-		});
-        console.log("getLeadDetail selected item: " + leadItem.Id + leadItem.Client + leadItem.Industry);
+		});		
+		$scope.lead.selectedItem = leadItem;
+
+        console.log("getLeadDetail selected item: " + $scope.lead.selectedItem.Id);
 		
-		$("#leadClientDetail").text(leadItem.Client);
-		$("#leadIndustryDetail").html(leadItem.Industry);
-		$("#leadContactDetail").html(leadItem.Contact);
-		$("#leadDescriptionDetail").html(leadItem.Description);
-		$("#leadLeadTypeDetail").html(leadItem.LeadType);
-		
-		$.mobile.changePage( $("#leadItem"), {transition: 'none', role: 'dialog'} );
+		$.mobile.changePage( $("#leadItem") );
 	}
 }

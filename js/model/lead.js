@@ -1,4 +1,5 @@
-﻿function Lead(idIn, titleIn, clientIn, industryIn, contactIn, descriptionIn, leadTypeIn, creatorUserNameIn) {
+﻿//All in capital as the object is used to synch with SharePoint
+function Lead(idIn, titleIn, clientIn, industryIn, contactIn, descriptionIn, leadTypeIn, creatorUserNameIn) {
 	this.Id = idIn;
 	this.Title = titleIn;
 	this.Client = clientIn;

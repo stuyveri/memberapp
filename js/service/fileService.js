@@ -57,6 +57,7 @@ function doWrite() {
 	var fileData = new FileData(variables.Settings, variables.News, variables.MyLeads);
 
 	variables.FileWriter.truncate(0);
+	console.log("doWrite file truncated!");
 	var data = angular.toJson(fileData)
 	//console.log("data: " + data);
 	variables.FileWriter.write( data );
