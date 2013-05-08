@@ -7,8 +7,10 @@ function SettingsController($scope) {
 		console.log("On filesLoadedDoneEvent called in SettingsController.");
 	
 		if( variables.Settings != null ) {
-			$scope.setting_user = variables.Settings.userName;
-			$scope.setting_password = variables.Settings.password;;
+			$scope.$apply( function( scope ) {
+				scope.setting_user = variables.Settings.userName;
+				scope.setting_password = variables.Settings.password;
+			});
 		}
 	});
 	

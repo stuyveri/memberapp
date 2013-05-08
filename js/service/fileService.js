@@ -54,16 +54,19 @@ function gotFile(file) {
 function doWrite() {
 	console.log("doWrite called");
 
-	var fileData = new FileData(variables.Settings, variables.News, variables.MyLeads);
-
 	variables.FileWriter.truncate(0);
-	console.log("doWrite file truncated!");
-	var data = angular.toJson(fileData)
-	//console.log("data: " + data);
-	variables.FileWriter.write( data );
-
-	console.log("doWrite done");
-	//TODO: callback for nice update on screen
+	variables.FileWriter.onwriteend = function(evt) {
+		console.log("doWrite file truncated!");
+		
+		var fileData = new FileData(variables.Settings, variables.News, variables.MyLeads);
+		var data = angular.toJson(fileData)
+		//console.log("data: " + data);
+		variables.FileWriter.write( data );
+		variables.FileWriter.onwriteend = function(evt){
+			console.log("doWrite done");
+			//TODO: callback for nice update on screen
+		};
+	};
 }
 
 function clearFile() {
@@ -76,5 +79,5 @@ function clearFile() {
 
 function fail(evt) {
 	//TODO: alert or something like that
-    console.log(evt.target.error.code);
+    console.log("error during file processing. Code: " + evt.target.error.code);
 }
